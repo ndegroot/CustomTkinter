@@ -17,7 +17,9 @@ class CTkInputDialog:
                  text="CTkDialog",
                  fg_color="default_theme",
                  hover_color="default_theme",
-                 border_color="default_theme"):
+                 border_color="default_theme",
+                 ok_text="OK",
+                 cancel_text="Cancel"):
 
         self.appearance_mode = AppearanceModeTracker.get_mode()  # 0: "Light" 1: "Dark"
         self.master = master
@@ -32,6 +34,8 @@ class CTkInputDialog:
         self.fg_color = ThemeManager.theme["color"]["button"] if fg_color == "default_theme" else fg_color
         self.hover_color = ThemeManager.theme["color"]["button_hover"] if hover_color == "default_theme" else hover_color
         self.border_color = ThemeManager.theme["color"]["button_hover"] if border_color == "default_theme" else border_color
+        self.ok_text = ok_text
+        self.cancel_text = cancel_text
 
         self.top = CTkToplevel()
         self.top.geometry(f"{280}x{self.height}")
@@ -71,7 +75,7 @@ class CTkInputDialog:
         self.entry.place(relx=0.5, rely=0.15, anchor=tkinter.CENTER)
 
         self.ok_button = CTkButton(master=self.button_and_entry_frame,
-                                   text='Ok',
+                                   text=self.ok_text,
                                    width=100,
                                    command=self.ok_event,
                                    fg_color=self.fg_color,
@@ -80,7 +84,7 @@ class CTkInputDialog:
         self.ok_button.place(relx=0.28, rely=0.65, anchor=tkinter.CENTER)
 
         self.cancel_button = CTkButton(master=self.button_and_entry_frame,
-                                       text='Cancel',
+                                       text=self.cancel_text,
                                        width=100,
                                        command=self.cancel_event,
                                        fg_color=self.fg_color,
